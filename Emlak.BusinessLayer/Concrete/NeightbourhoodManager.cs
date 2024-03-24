@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Emlak.BusinessLayer.Concrete
 {
-    public class NeightbourhoodManager : GenericService<Neighbourhood>
+    public class NeightbourhoodManager : NeightbourhoodService
     {
         INeighbourhoodRepository _neighbourhoodRepository;
 
@@ -34,9 +34,9 @@ namespace Emlak.BusinessLayer.Concrete
             return _neighbourhoodRepository.GetListFilter(filter);
         }
 
-        public List<Neighbourhood> TGetListAll()
+        public List<Neighbourhood> TGetList()
         {
-            return _neighbourhoodRepository.GetListAll();
+            return _neighbourhoodRepository.GetList();
         }
 
         public void TUpdate(Neighbourhood entity)

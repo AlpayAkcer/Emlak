@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Emlak.BusinessLayer.Concrete
 {
-    public class AdvertManager : GenericService<Advert>
+    public class AdvertManager : AdvertService
     {
         IAdvertRepository _advertRepository;
 
@@ -16,12 +16,17 @@ namespace Emlak.BusinessLayer.Concrete
 
         public void TAdd(Advert entity)
         {
+            entity.Status = true;
+            entity.AdvertDate = DateTime.Now;
             _advertRepository.Add(entity);
         }
 
         public void TDelete(Advert entity)
         {
-            _advertRepository.Delete(entity);
+            var delete = _advertRepository.GetByID(entity.AdvertID);
+            entity.Status = false;
+            //_advertRepository.Delete(entity);
+            _advertRepository.Update(delete);
         }
 
         public Advert TGetByID(int id)
@@ -34,14 +39,20 @@ namespace Emlak.BusinessLayer.Concrete
             return _advertRepository.GetListFilter(filter);
         }
 
-        public List<Advert> TGetListAll()
+        public List<Advert> TGetList()
         {
-            return _advertRepository.GetListAll();
+            return _advertRepository.GetList();
         }
 
         public void TUpdate(Advert entity)
-        {
+        {            
             _advertRepository.Update(entity);
+        }
+
+        public void CompleteDelete(Advert advert)
+        {
+            var delete = _advertRepository.GetByID(advert.AdvertID);
+            _advertRepository.Delete(delete);
         }
     }
 }

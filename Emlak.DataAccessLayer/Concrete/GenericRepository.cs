@@ -7,7 +7,7 @@ namespace Emlak.DataAccessLayer.Concrete
 {
     public class GenericRepository<T, TContext> : IRepository<T> where T : class, new() where TContext : class
     {
-        private readonly EmlakDbContext _dbContext = new EmlakDbContext();
+        private EmlakDbContext _dbContext = new EmlakDbContext();
         DbSet<T> _object;
 
         public GenericRepository(EmlakDbContext dbContext)
@@ -19,11 +19,13 @@ namespace Emlak.DataAccessLayer.Concrete
         public void Add(T entity)
         {
             _object.Add(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Delete(T entity)
         {
             _object.Remove(entity);
+            _dbContext.SaveChanges();
         }
 
         public T GetByID(int id)
@@ -36,7 +38,7 @@ namespace Emlak.DataAccessLayer.Concrete
             return _object.Where(filter).ToList();
         }
 
-        public List<T> GetListAll()
+        public List<T> GetList()
         {
             return _object.ToList();
         }
@@ -44,6 +46,7 @@ namespace Emlak.DataAccessLayer.Concrete
         public void Update(T entity)
         {
             _object.Update(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

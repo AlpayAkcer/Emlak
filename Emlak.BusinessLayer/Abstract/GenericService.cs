@@ -4,7 +4,7 @@ namespace Emlak.BusinessLayer.Abstract
 {
     public interface GenericService<T>
     {
-        List<T> TGetListAll();
+        List<T> TGetList();
         void TAdd(T entity);
         void TDelete(T entity);
         void TUpdate(T entity);

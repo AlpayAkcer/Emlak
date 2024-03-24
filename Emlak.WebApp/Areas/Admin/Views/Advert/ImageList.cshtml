@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Images>
+@{
+    ViewData["Title"] = "ImageList";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+@{
+    int imgId = 0;
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">UI elements /</span> @ViewBag.AdvertName İlan Resimleri</h4>
+    <button type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#newImageUpload">
+        <i class="bx bx-plus-circle"></i>
+    </button>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="carousel slide">
+                    <div class="carousel-inner mb-2">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="/Uploads/Adverts/@item.ImageName" alt="First slide">
+                            <div class="carousel-caption d-md-block">
+                                @{
+                                    imgId = item.ImagesID;
+                                }
+                                <p>
+                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                       data-bs-target="#UpdateImageUpload"><i class="bx bx-edit"></i></a>
+
+                                    <a class="btn btn-danger btn-sm" asp-action="ImageDelete" asp-controller="Advert" asp-route-imageId="@item.ImagesID"><i class="bx bx-minus-circle"></i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<div class="modal fade" id="newImageUpload" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog">
+        <form class="modal-content" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" data-id="@ViewBag.AdvertId" id="AdvertID" />
+            <div class="modal-header">
+                <h5 class="modal-title" id="backDropModalTitle">Yeni Resim Ekle -@ViewBag.AdvertId </h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="ImageUrl" class="form-label">Yeni Resim</label>
+                        <input type="file"
+                               id="ImageUrl" name="ImageUrl" multiple
+                               class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit" asp-controller="Advert" asp-action="CreateImageAdvert" asp-area="Admin" asp-route-advertId="@ViewBag.AdvertId" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="UpdateImageUpload" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog">
+        <form class="modal-content" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" id="@imgId" />
+            <div class="modal-header">
+                <h5 class="modal-title" id="backDropModalTitle">Güncelle -@imgId </h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-2">
+                    <div class="col mb-0">
+                        <label for="ImageUrl" class="form-label">Yeni Resim</label>
+                        <input type="file"
+                               id="ImageUrl" name="ImageUrl" multiple
+                               class="form-control" />
+                    </div>
+                </div>
+                <img src="/Uploads/Adverts/@ViewBag.EskiResim" width="120" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit" asp-controller="Advert" asp-route-imgId="@imgId" asp-action="ImageUpdate" asp-area="Admin" class="btn btn-primary">Güncelle</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

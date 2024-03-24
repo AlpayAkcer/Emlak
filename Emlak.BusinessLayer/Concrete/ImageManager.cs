@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Emlak.BusinessLayer.Concrete
 {
-    public class ImageManager : GenericService<Images>
+    public class ImageManager : ImageService
     {
         IImagesRepository _imagesRepository;
 
@@ -34,13 +34,14 @@ namespace Emlak.BusinessLayer.Concrete
             return _imagesRepository.GetListFilter(filter);
         }
 
-        public List<Images> TGetListAll()
+        public List<Images> TGetList()
         {
-            return _imagesRepository.GetListAll();
+            return _imagesRepository.GetList();
         }
 
         public void TUpdate(Images entity)
         {
+            var update = _imagesRepository.GetByID(entity.ImagesID);
             _imagesRepository.Update(entity);
         }
     }

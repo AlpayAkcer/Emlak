@@ -4,7 +4,7 @@ namespace Emlak.DataAccessLayer.Abstract
 {
     public interface IRepository<T> where T : class, new()
     {
-        List<T> GetListAll();
+        List<T> GetList();
         void Add(T entity);
         void Delete(T entity);
         void Update(T entity);

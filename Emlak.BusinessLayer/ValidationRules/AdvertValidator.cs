@@ -19,12 +19,6 @@ namespace Emlak.BusinessLayer.ValidationRules
                 .WithName("Başlık")
                 .WithMessage("İlan Başlığını Boş Bırakmayınız");
 
-            RuleFor(x => x.Address)
-                .NotEmpty()
-                .MinimumLength(1)
-                .WithName("Adres")
-                .WithMessage("İlan Adresini Boş Bırakmayınız");
-
             RuleFor(x => x.AirCordinator)
                 .NotEmpty()
                 .WithName("Klima")
@@ -84,6 +78,12 @@ namespace Emlak.BusinessLayer.ValidationRules
                 .WithMessage("Havuz Alanını Boş Bırakmayınız");
 
             RuleFor(x => x.PhoneNumber).Matches(new Regex(@"(^(\+90|0)?\s*(\(\d{3}\)[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}|\(\d{3}\)[\s-]*\d{3}[\s-]*\d{4}|\(\d{3}\)[\s-]*\d{7}|\d{3}[\s-]*\d{3}[\s-]*\d{4}|\d{3}[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2})$)"));
+
+            RuleFor(x => x.Address)
+               .NotEmpty()
+               .MinimumLength(1)
+               .WithName("Adres")
+               .WithMessage("İlan Adresini Boş Bırakmayınız");
         }
     }
 }

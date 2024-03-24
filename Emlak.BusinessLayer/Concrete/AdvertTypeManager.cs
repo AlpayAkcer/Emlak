@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Emlak.BusinessLayer.Concrete
 {
-    public class AdvertTypeManager : GenericService<AdvertType>
+    public class AdvertTypeManager : AdvertTypeService
     {
         IAdvertTypeRepository _advertTyperepository;
 
@@ -34,9 +34,9 @@ namespace Emlak.BusinessLayer.Concrete
             return _advertTyperepository.GetListFilter(filter);
         }
 
-        public List<AdvertType> TGetListAll()
+        public List<AdvertType> TGetList()
         {
-            return _advertTyperepository.GetListAll();
+            return _advertTyperepository.GetList();
         }
 
         public void TUpdate(AdvertType entity)

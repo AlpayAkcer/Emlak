@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Emlak.BusinessLayer.Concrete
 {
-    public class GeneralSettingManager : GenericService<GeneralSetting>
+    public class GeneralSettingManager : GeneralSettingService
     {
         IGeneralSettingRepository _generalSettingRepository;
 
@@ -34,9 +34,9 @@ namespace Emlak.BusinessLayer.Concrete
             return _generalSettingRepository.GetListFilter(filter);
         }
 
-        public List<GeneralSetting> TGetListAll()
+        public List<GeneralSetting> TGetList()
         {
-            return _generalSettingRepository.GetListAll();
+            return _generalSettingRepository.GetList();
         }
 
         public void TUpdate(GeneralSetting entity)

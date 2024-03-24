@@ -17,17 +17,17 @@ namespace Emlak.EntityLayer.Entities
         public string Description { get; set; }     // ilan içeriği açıklaması
         public double Price { get; set; }           // ilan fiyatı
         public string Garage { get; set; }          // Garaj Var mı?
-        public bool Garden { get; set; }            // Bahçesi Var mı?
-        public bool FirePlace { get; set; }         // Isıtma Sistemi VAr mı?
-        public bool Furniture { get; set; }         // Mobilya Var mı?
-        public bool Pool { get; set; }              // Havuz Var mı?
-        public bool Teras { get; set; }             // Teras Var mı?
-        public bool AirCordinator { get; set; }     // Klima Var mı?
+        public bool Garden { get; set; } = false;       // Bahçesi Var mı?
+        public bool FirePlace { get; set; } = false;       // Isıtma Sistemi VAr mı?
+        public bool Furniture { get; set; } = false;       // Mobilya Var mı?
+        public bool Pool { get; set; } = false;        // Havuz Var mı?
+        public bool Teras { get; set; } = false;       // Teras Var mı?
+        public bool AirCordinator { get; set; } = false;     // Klima Var mı?
         public int NumberOfRoom { get; set; }       // Oda Sayısı
         public int BathOfRoomNumber { get; set; }   // Banyo Sayısı
-        public bool Credit { get; set; }            // Krediye Uygun mu? Değil mi?
-        public int Area { get; set; }               // Mt2 alanı
-        public int Floor { get; set; }              // Kat Sayısı
+        public bool Credit { get; set; } = false;       // Krediye Uygun mu? Değil mi?
+        public int Area { get; set; } = 0;         // Mt2 alanı
+        public int Floor { get; set; } = 0;         // Kat Sayısı
         public DateTime AdvertDate { get; set; }    // İlanın Eklenme Tarihi
         public string Address { get; set; }         // İlan Adresi
         public int CityID { get; set; }             // Şehir 

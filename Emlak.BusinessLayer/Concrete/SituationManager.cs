@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Emlak.BusinessLayer.Concrete
 {
-    public class SituationManager : GenericService<Situation>
+    public class SituationManager : SituationService
     {
         ISituationRepository _situationRepository;
 
@@ -34,9 +34,9 @@ namespace Emlak.BusinessLayer.Concrete
             return _situationRepository.GetListFilter(filter);
         }
 
-        public List<Situation> TGetListAll()
+        public List<Situation> TGetList()
         {
-            return _situationRepository.GetListAll();
+            return _situationRepository.GetList();
         }
 
         public void TUpdate(Situation entity)

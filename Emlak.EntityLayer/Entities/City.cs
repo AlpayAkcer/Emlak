@@ -7,7 +7,6 @@ namespace Emlak.EntityLayer.Entities
         [Key]
         public int CityID { get; set; }
         public string CityName { get; set; }
-        public bool Status { get; set; }
 
         public virtual List<District> Districts { get; set; }
     }

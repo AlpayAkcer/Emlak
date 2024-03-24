@@ -1,0 +1,262 @@
+﻿@model Emlak.EntityLayer.Entities.Advert
+@{
+    ViewData["Title"] = "UpdateAdvert";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <h4 class="fw-bold py-3 mb-4">
+        <span class="text-muted fw-light">İlan Yönetimi /</span>İlan Güncelle
+    </h4>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <h5 class="card-header"></h5>
+                <form asp-controller="Advert" asp-action="UpdateAdvert" asp-area="Admin" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <input type="hidden" asp-for="AdvertID" />
+                    <a class="btn btn-primary text-white float-end m-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                        Yeni Kategori Ekle <i class="bx bx-plus"></i>
+                    </a>
+                    <input type="hidden" value="@ViewBag.UserID" asp-for="UserAdminID" />
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="Title" id="defaultFormControlInput" class="form-label">Başlık</label>
+                            <input asp-for="Title" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Lütfen başlık giriniz." aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" id="defaultFormControlInput" class="form-label">Description</label>
+                            <textarea asp-for="Description" type="text" class="form-control mb-3" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="form-control" asp-for="CityID">
+                                        <option value="0">Şehir Seçimi Yapınız</option>
+                                        @foreach (var item in ViewBag.CityList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="form-control" asp-for="DistrictID" id="DistrictID">
+                                        <option value="0">İlçe Seçimi Yapınız</option>
+                                        @foreach (var item in ViewBag.district)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="form-control" asp-for="NeighbourhoodID" id="NeighbourhoodID">
+                                        <option value="0">Mahalle Seçimi Yapınız</option>
+                                        @foreach (var item in ViewBag.neighbourhood)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control" asp-for="SituationID">
+                                        <option value="0">Durum Seçimi Yapınız</option>
+                                        @foreach (var item in ViewBag.situations)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control" asp-for="AdvertTypeID" id="AdvertTypeID">
+                                        <option value="0">Seçimi Yapınız</option>
+                                        @foreach (var item in ViewBag.advertType)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price" for="defaultFormControlInput" class="form-label">Price</label>
+                            <input asp-for="Price" type="text" class="form-control mb-3" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Garage" for="defaultFormControlInput" class="form-label">Garage</label>
+                            <input asp-for="Garage" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="İçerik" aria-describedby="defaultFormControlHelp" />
+                            <span asp-validation-for="Garage" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" asp-for="Garden" type="checkbox" id="Garden" checked="">
+                                    <label class="form-check-label" asp-for="Garden" for="Garden">Bahçe var mı?</label>
+                                    <span asp-validation-for="Garden" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" asp-for="FirePlace" type="checkbox" id="FirePlace" checked="">
+                                    <label class="form-check-label" asp-for="FirePlace" for="FirePlace">Yerden Isıtma var mı?</label>
+                                    <span asp-validation-for="FirePlace" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" asp-for="Furniture" type="checkbox" id="Furniture" checked="">
+                                    <label class="form-check-label" asp-for="Furniture" for="Furniture">Mobilya var mı?</label>
+                                    <span asp-validation-for="Furniture" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" asp-for="Pool" type="checkbox" id="Pool" checked="">
+                                    <label class="form-check-label" asp-for="Pool" for="Pool">Havuz var mı?</label>
+                                    <span asp-validation-for="Pool" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" asp-for="Teras" type="checkbox" id="Teras" checked="">
+                                    <label class="form-check-label" asp-for="Teras" for="Teras">Teraslı mı?</label>
+                                    <span asp-validation-for="Teras" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" asp-for="AirCordinator" type="checkbox" id="AirCordinator" checked="">
+                                    <label class="form-check-label" asp-for="AirCordinator" for="AirCordinator">Klimalı mı?</label>
+                                    <span asp-validation-for="AirCordinator" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NumberOfRoom" for="defaultFormControlInput" class="form-label">NumberOfRoom</label>
+                            <input asp-for="NumberOfRoom" type="text" class="form-control mb-3" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+                            <span asp-validation-for="NumberOfRoom" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BathOfRoomNumber" for="defaultFormControlInput" class="form-label">BathOfRoomNumber</label>
+                            <input asp-for="BathOfRoomNumber" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="İçerik" aria-describedby="defaultFormControlHelp" />
+                            <span asp-validation-for="BathOfRoomNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" asp-for="Credit" type="checkbox" id="Credit" checked="">
+                                <label class="form-check-label" asp-for="Credit">Krediye Uygun mu?</label>
+                                <span asp-validation-for="Credit" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Area" for="defaultFormControlInput" class="form-label">Area</label>
+                            <input asp-for="Area" type="text" class="form-control mb-3" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+                            <span asp-validation-for="Area" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Floor" for="defaultFormControlInput" class="form-label">Floor</label>
+                            <input asp-for="Floor" type="text" class="form-control mb-3" id="defaultFormControlInput" />
+                            <span asp-validation-for="Floor" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber" for="defaultFormControlInput" class="form-label">PhoneNumber</label>
+                            <input asp-for="PhoneNumber" type="text" class="form-control mb-3" id="defaultFormControlInput" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Address" id="defaultFormControlInput" class="form-label">Address</label>
+                            <textarea asp-for="Address" type="text" class="form-control mb-3" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-warning btn-block">Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#CityID").change(function () {
+            var cityId = $(this).val();
+
+            console.log(cityId);
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Advert/GetDistrict?cityId=" + cityId,
+                contentType: "html",
+
+                success: function (response) {
+
+                    $("#DistrictID").empty();
+                    $("#DistrictID").append(response);
+                }
+            });
+        });
+
+        $("#SituationID").change(function () {
+            var situationId = $(this).val();
+
+            console.log(situationId);
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Advert/GetAdvertType?situationId=" + situationId,
+                contentType: "html",
+
+                success: function (response) {
+
+                    $("#AdvertTypeID").empty();
+                    $("#AdvertTypeID").append(response);
+                }
+            });
+        });
+
+        $("#DistrictID").change(function () {
+            var districtId = $(this).val();
+
+            console.log(districtId);
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Advert/GetNeighbourHood?districtId=" + districtId,
+                contentType: "html",
+
+                success: function (response) {
+
+                    $("#NeighbourhoodID").empty();
+                    $("#NeighbourhoodID").append(response);
+                }
+            });
+        });
+
+    });
+</script>
+
+
+

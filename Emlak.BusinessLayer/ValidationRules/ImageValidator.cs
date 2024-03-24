@@ -7,7 +7,7 @@ namespace Emlak.BusinessLayer.ValidationRules
     {
         public ImageValidator()
         {
-            RuleFor(x => x.ImageName)
+            RuleFor(x => x.ImageUrl.Name)
                 .NotEmpty()
                 .MinimumLength(1)
                 .WithName("Resim Adı")

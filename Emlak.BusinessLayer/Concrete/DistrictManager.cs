@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Emlak.BusinessLayer.Concrete
 {
-    public class DistrictManager : GenericService<District>
+    public class DistrictManager : DistrictService
     {
         IDistrictRepository _districtRepository;
 
@@ -34,9 +34,9 @@ namespace Emlak.BusinessLayer.Concrete
             return _districtRepository.GetListFilter(filter);
         }
 
-        public List<District> TGetListAll()
+        public List<District> TGetList()
         {
-            return _districtRepository.GetListAll();
+            return _districtRepository.GetList();
         }
 
         public void TUpdate(District entity)

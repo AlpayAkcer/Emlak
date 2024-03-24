@@ -1,0 +1,11 @@
+﻿
+
+<option value="">Tip Seçiniz</option>
+
+@if (ViewBag.AdvertTypeList != null)
+{
+    @foreach (var item in ViewBag.AdvertTypeList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}
